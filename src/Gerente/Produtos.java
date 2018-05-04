@@ -56,14 +56,14 @@ public class Produtos extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nome", "Descrição", "Valor", "Estoque"
             }
         ));
         jScrollPane1.setViewportView(tbProduto);
 
         jLabel1.setText("Nome:");
 
-        jLabel2.setText("Fornecedor");
+        jLabel2.setText("Descrição:");
 
         tfFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
