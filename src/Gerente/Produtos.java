@@ -4,6 +4,10 @@
  */
 package Gerente;
 
+import br.com.senac.produto.Produto;
+import br.com.senac.produto.ProdutoControl;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aluno
@@ -33,7 +37,7 @@ public class Produtos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         tfNome = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        tfFornecedor = new javax.swing.JTextField();
+        tfDescricao = new javax.swing.JTextField();
         tfValor = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -50,13 +54,13 @@ public class Produtos extends javax.swing.JFrame {
 
         tbProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Nome", "Descrição", "Valor", "Estoque"
+                "Nome", "Gênero", "Descrição", "Valor", "Estoque", "Data"
             }
         ));
         jScrollPane1.setViewportView(tbProduto);
@@ -65,9 +69,9 @@ public class Produtos extends javax.swing.JFrame {
 
         jLabel2.setText("Descrição:");
 
-        tfFornecedor.addActionListener(new java.awt.event.ActionListener() {
+        tfDescricao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfFornecedorActionPerformed(evt);
+                tfDescricaoActionPerformed(evt);
             }
         });
 
@@ -78,6 +82,11 @@ public class Produtos extends javax.swing.JFrame {
         btNovo.setText("Novo");
 
         btGravar.setText("Gravar");
+        btGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btGravarActionPerformed(evt);
+            }
+        });
 
         btAlterar.setText("Alterar");
 
@@ -114,19 +123,17 @@ public class Produtos extends javax.swing.JFrame {
                                     .addComponent(tfNome)
                                     .addGap(22, 22, 22))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(tfFornecedor)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tfEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                                .addComponent(jLabel3)
-                                .addComponent(tfValor)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addGap(216, 216, 216)
-                            .addComponent(jLabel6))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jLabel2)
+                                        .addComponent(tfDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(tfValor))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -154,10 +161,12 @@ public class Produtos extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tfEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 17, Short.MAX_VALUE))
+                    .addComponent(tfDescricao))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btNovo)
                     .addComponent(btGravar)
@@ -175,9 +184,20 @@ public class Produtos extends javax.swing.JFrame {
     
     
     
-    private void tfFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfFornecedorActionPerformed
+    private void tfDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDescricaoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfFornecedorActionPerformed
+    }//GEN-LAST:event_tfDescricaoActionPerformed
+
+    private void btGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGravarActionPerformed
+        Produto produtos = new Produto();
+        produtos.setNome(tfNome.getText());
+        produtos.setDescricao(tfDescricao.getText());
+        produtos.setValor(Double.valueOf(tfValor.getText()));
+        produtos.setQuantidade(Integer.valueOf(tfEstoque.getText()));
+        ProdutoControl produtoControl = new ProdutoControl();
+        produtoControl.inserir(produto);
+        JOptionPane.showMessageDialog(null, "Gravado com sucesso!!!");
+    }//GEN-LAST:event_btGravarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,8 +246,8 @@ public class Produtos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbProduto;
+    private javax.swing.JTextField tfDescricao;
     private javax.swing.JTextField tfEstoque;
-    private javax.swing.JTextField tfFornecedor;
     private javax.swing.JTextField tfNome;
     private javax.swing.JTextField tfPesquisar;
     private javax.swing.JTextField tfValor;

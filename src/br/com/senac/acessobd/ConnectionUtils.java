@@ -18,7 +18,7 @@ public class ConnectionUtils {
     public static Connection getConnection(){
         Connection con = null;
         String urlConnection = 
-                "jdbc:mysql://localhost:3306/usuario_teste";
+                "jdbc:mysql://localhost:3306/teste";
         
         Properties properties = new Properties();
         properties.put("user", "root");
