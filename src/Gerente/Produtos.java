@@ -195,7 +195,7 @@ public class Produtos extends javax.swing.JFrame {
         produtos.setValor(Double.valueOf(tfValor.getText()));
         produtos.setQuantidade(Integer.valueOf(tfEstoque.getText()));
         ProdutoControl produtoControl = new ProdutoControl();
-        produtoControl.inserir(produto);
+        produtoControl.CadastrarProduto(produto);
         JOptionPane.showMessageDialog(null, "Gravado com sucesso!!!");
     }//GEN-LAST:event_btGravarActionPerformed
 

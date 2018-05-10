@@ -3,15 +3,19 @@ package br.com.senac.produto;
 import java.sql.Date;
 
 public class Produto {
+
     private int   codigo;
     private String nome;
+    private String cor;
+    private String tamanho;
     private String genero;
     private String descricao;
     private int quantidade;
     private Date data;
-    private double valor;
+    private double preco;
+    private boolean enable;
     
-    public int getCodigo() {
+        public int getCodigo() {
         return codigo;
     }
 
@@ -25,6 +29,22 @@ public class Produto {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getCor() {
+        return cor;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
+    public String getTamanho() {
+        return tamanho;
+    }
+
+    public void setTamanho(String tamanho) {
+        this.tamanho = tamanho;
     }
 
     public String getGenero() {
@@ -59,19 +79,21 @@ public class Produto {
         this.data = data;
     }
 
-    public double getValor() {
-        return valor;
+    public double getPreco() {
+        return preco;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setPreco(double preco) {
+        this.preco = preco;
     }
 
-    String getDate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean isEnable() {
+        return enable;
     }
 
-
-
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+    
 }
 
