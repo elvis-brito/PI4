@@ -14,8 +14,8 @@ public class Produto {
     private Date data;
     private double preco;
     private boolean enable;
-    
-        public int getCodigo() {
+
+    public int getCodigo() {
         return codigo;
     }
 
@@ -94,6 +94,6 @@ public class Produto {
     public void setEnable(boolean enable) {
         this.enable = enable;
     }
-    
+       
 }
 
