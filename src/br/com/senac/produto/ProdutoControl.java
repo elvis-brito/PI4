@@ -13,7 +13,7 @@ public class ProdutoControl {
     ResultSet rs;
     
     String produtoInsert = "INSERT INTO produto (nome_produto, genero_produto, cor, tamanho_produto, descricao_produto, preco_produto, quant_estoque_produto, data_cadastro_produto, enable) VALUES (?,?,?,?,?,?,?,?,?)";
-    String produtoSelect = "SELECT * FROM produto WHERE nome_produto LIKE ?";
+    String produtoSelect = "SELECT * FROM produto WHERE nome_produto LIKE ? AND enable = 1";
     
     public void CadastrarProduto(Produto produto){
         try{

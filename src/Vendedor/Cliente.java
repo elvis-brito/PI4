@@ -8,11 +8,12 @@ package Vendedor;
 import br.com.senac.cliente.ClienteCadastro;
 import br.com.senac.cliente.ClienteControl;
 import javax.swing.JOptionPane;
-import java.sql.Date;
+import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.text.DateFormat;
 
   public class Cliente extends javax.swing.JFrame {
     public Cliente (){
@@ -70,7 +71,7 @@ import java.util.logging.Logger;
 
         lblSexo.setText("Sexo:");
 
-        jComboBoxSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Feminino", "Masculino", "Genêro" }));
+        jComboBoxSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "F", "M", "G" }));
 
         try {
             txtDataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -366,8 +367,17 @@ import java.util.logging.Logger;
         clientes.setSexoCliente(String.valueOf(jComboBoxSexo.getSelectedItem()));
         clientes.setRgCliente(txtRg.getText());
         clientes.setCpfCliente(txtcpf.getText());
-        String datanasc = txtDataNasc.getText();
-        clientes.setDataNascimentoCliente(datanasc);
+        DateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = null;
+        try {
+            date = dt.parse(txtDataNasc.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        clientes.setDataNascimentoCliente(date);
+      
+        
         clientes.setEmailCliente(txtEmail.getText());
         clientes.setCelularCliente(txtCelular.getText());
         clientes.setTelefoneCliente(txtTelefone.getText());

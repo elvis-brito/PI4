@@ -49,9 +49,6 @@ public class EditarCliente extends javax.swing.JFrame {
         txtcpf2 = new javax.swing.JFormattedTextField();
         lblRg2 = new javax.swing.JLabel();
         txtRg2 = new javax.swing.JFormattedTextField();
-        lblData2 = new javax.swing.JLabel();
-        txtData2 = new javax.swing.JFormattedTextField();
-        lblHora2 = new javax.swing.JLabel();
         lblTelefoneFixo = new javax.swing.JLabel();
         txtTelefone = new javax.swing.JFormattedTextField();
         lblCelular = new javax.swing.JLabel();
@@ -174,16 +171,11 @@ public class EditarCliente extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-
-        lblData2.setText("Data:");
-
-        try {
-            txtData2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        lblHora2.setText("Hora:");
+        txtRg2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRg2ActionPerformed(evt);
+            }
+        });
 
         lblTelefoneFixo.setText("Telefone Fixo:");
 
@@ -223,12 +215,6 @@ public class EditarCliente extends javax.swing.JFrame {
                         .addGap(4, 4, 4)
                         .addGroup(jPanelIdentificaçãoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNome)
-                            .addGroup(jPanelIdentificaçãoLayout.createSequentialGroup()
-                                .addComponent(lblData2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtData2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(66, 66, 66)
-                                .addComponent(lblHora2))
                             .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(63, 63, 63)
                         .addGroup(jPanelIdentificaçãoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,13 +242,9 @@ public class EditarCliente extends javax.swing.JFrame {
         jPanelIdentificaçãoLayout.setVerticalGroup(
             jPanelIdentificaçãoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelIdentificaçãoLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addGroup(jPanelIdentificaçãoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelIdentificaçãoLayout.createSequentialGroup()
-                        .addGroup(jPanelIdentificaçãoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblData2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtData2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblHora2))
-                        .addGap(18, 18, 18)
                         .addComponent(lblNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelIdentificaçãoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -428,6 +410,10 @@ public class EditarCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtRg2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRg2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRg2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -479,12 +465,10 @@ public class EditarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel lblCpf;
     private javax.swing.JLabel lblCpf2;
     private javax.swing.JLabel lblData;
-    private javax.swing.JLabel lblData2;
     private javax.swing.JLabel lblDataNasc;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblEndereço;
     private javax.swing.JLabel lblHora;
-    private javax.swing.JLabel lblHora2;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblRg;
     private javax.swing.JLabel lblRg2;
@@ -496,7 +480,6 @@ public class EditarCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtComplemento;
     private javax.swing.JFormattedTextField txtData;
-    private javax.swing.JFormattedTextField txtData2;
     private javax.swing.JFormattedTextField txtDataNasc;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEndereço;

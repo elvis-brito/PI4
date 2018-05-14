@@ -25,12 +25,13 @@ public class ClienteControl {
             pstm.setString(6, cliente.getEmailCliente());
             pstm.setString(7, cliente.getCelularCliente());
             pstm.setString(8, cliente.getTelefoneCliente());
-            pstm.setDate(3, new Date(cliente.getDataCadastroCliente().getTime()));
+            pstm.setDate(9, new Date(cliente.getDataCadastroCliente().getTime()));
             pstm.setBoolean(10, true);
             pstm.execute();
         }catch(Exception ex){
             ex.printStackTrace();
         }
+        
     }
     
 }
