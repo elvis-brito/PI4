@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Gerente;
+package br.com.senac.gerente;
 
 import br.com.senac.produto.Produto;
 import br.com.senac.produto.ProdutoControl;
@@ -89,6 +89,11 @@ public class Produtos extends javax.swing.JFrame {
         });
 
         btNovo.setText("Novo");
+        btNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNovoActionPerformed(evt);
+            }
+        });
 
         btGravar.setText("Gravar");
         btGravar.addActionListener(new java.awt.event.ActionListener() {
@@ -338,6 +343,10 @@ public class Produtos extends javax.swing.JFrame {
     private void tbProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProdutoMouseClicked
         linhaSelecionada();
     }//GEN-LAST:event_tbProdutoMouseClicked
+
+    private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btNovoActionPerformed
 
     /**
      * @param args the command line arguments

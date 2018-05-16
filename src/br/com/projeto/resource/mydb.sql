@@ -26,9 +26,9 @@ DROP TABLE IF EXISTS `bd_loja_roupas`.`cliente` ;
 CREATE TABLE IF NOT EXISTS `bd_loja_roupas`.`cliente` (
   `id_cliente` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nome_cliente` VARCHAR(45) NOT NULL,
-  `sexo_cliente` VARCHAR(1) NOT NULL,
-  `rg_cliente` VARCHAR(12) NOT NULL,
-  `cpf_cliente` VARCHAR(12) NOT NULL,
+  `sexo_cliente` VARCHAR(10) NOT NULL,
+  `rg_cliente` VARCHAR(15) NOT NULL,
+  `cpf_cliente` VARCHAR(15) NOT NULL,
   `data_nasc_cliente` DATE NOT NULL,
   `email_cliente` VARCHAR(100) NULL,
   `celular_cliente` VARCHAR(11) NOT NULL,

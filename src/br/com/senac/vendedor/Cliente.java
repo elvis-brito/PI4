@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vendedor;
+package br.com.senac.vendedor;
 
 import br.com.senac.cliente.ClienteCadastro;
 import br.com.senac.cliente.ClienteControl;
+import br.com.senac.cliente.ClienteEndereco;
+import br.com.senac.cliente.ClienteEnderecoControl;
 import javax.swing.JOptionPane;
 import java.util.Date;
 import java.text.ParseException;
@@ -16,6 +18,8 @@ import java.util.logging.Logger;
 import java.text.DateFormat;
 
   public class Cliente extends javax.swing.JFrame {
+      
+      private Consulta consultaCli = null;
     public Cliente (){
         initComponents();
     }
@@ -32,12 +36,9 @@ import java.text.DateFormat;
         jComboBoxSexo = new javax.swing.JComboBox<>();
         txtDataNasc = new javax.swing.JFormattedTextField();
         lblCpf = new javax.swing.JLabel();
-        txtcpf = new javax.swing.JFormattedTextField();
+        txtCpf = new javax.swing.JFormattedTextField();
         lblRg = new javax.swing.JLabel();
         txtRg = new javax.swing.JFormattedTextField();
-        lblData = new javax.swing.JLabel();
-        txtData = new javax.swing.JFormattedTextField();
-        lblHora = new javax.swing.JLabel();
         lblTelefoneFixo = new javax.swing.JLabel();
         txtTelefone = new javax.swing.JFormattedTextField();
         lblCelular = new javax.swing.JLabel();
@@ -50,16 +51,20 @@ import java.text.DateFormat;
         lblBairro = new javax.swing.JLabel();
         txtBairro = new javax.swing.JTextField();
         lblComplemento = new javax.swing.JLabel();
-        txtComplemento = new javax.swing.JTextField();
         lblUf = new javax.swing.JLabel();
         jComboBoxUf = new javax.swing.JComboBox<>();
         lblCidade = new javax.swing.JLabel();
         txtCidade = new javax.swing.JTextField();
         lblCep = new javax.swing.JLabel();
-        txtcep = new javax.swing.JFormattedTextField();
-        jTextField1 = new javax.swing.JTextField();
+        txtCep = new javax.swing.JFormattedTextField();
+        txtComplemento = new javax.swing.JTextField();
+        lblNumero = new javax.swing.JLabel();
+        txtNumero = new javax.swing.JTextField();
         ButtonSalvar = new javax.swing.JButton();
         ButtonAlterar = new javax.swing.JButton();
+        ButtonNovo = new javax.swing.JButton();
+        ButtonFechar = new javax.swing.JButton();
+        ButtonPesquisar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -71,7 +76,7 @@ import java.text.DateFormat;
 
         lblSexo.setText("Sexo:");
 
-        jComboBoxSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "F", "M", "G" }));
+        jComboBoxSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Feminino", "Masculino" }));
 
         try {
             txtDataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -82,7 +87,7 @@ import java.text.DateFormat;
         lblCpf.setText("CPF:");
 
         try {
-            txtcpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -90,20 +95,10 @@ import java.text.DateFormat;
         lblRg.setText("RG:");
 
         try {
-            txtRg.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###-##")));
+            txtRg.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("############")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-
-        lblData.setText("Data:");
-
-        try {
-            txtData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        lblHora.setText("Hora:");
 
         lblTelefoneFixo.setText("Telefone Fixo:");
 
@@ -136,19 +131,13 @@ import java.text.DateFormat;
                         .addGroup(jPanelIdentificaçãoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblRg)
                             .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(txtcpf, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSexo)
                     .addComponent(jComboBoxSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelIdentificaçãoLayout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addGroup(jPanelIdentificaçãoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNome)
-                            .addGroup(jPanelIdentificaçãoLayout.createSequentialGroup()
-                                .addComponent(lblData)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(66, 66, 66)
-                                .addComponent(lblHora))
                             .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(63, 63, 63)
                         .addGroup(jPanelIdentificaçãoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,7 +146,7 @@ import java.text.DateFormat;
                 .addGap(31, 31, 31)
                 .addGroup(jPanelIdentificaçãoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelIdentificaçãoLayout.createSequentialGroup()
-                        .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                        .addComponent(txtEmail)
                         .addGap(36, 36, 36))
                     .addGroup(jPanelIdentificaçãoLayout.createSequentialGroup()
                         .addGroup(jPanelIdentificaçãoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,18 +160,14 @@ import java.text.DateFormat;
                             .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblCelular)
                             .addComponent(lblEmail))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(121, Short.MAX_VALUE))))
         );
         jPanelIdentificaçãoLayout.setVerticalGroup(
             jPanelIdentificaçãoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelIdentificaçãoLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addGroup(jPanelIdentificaçãoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelIdentificaçãoLayout.createSequentialGroup()
-                        .addGroup(jPanelIdentificaçãoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblData, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblHora))
-                        .addGap(18, 18, 18)
                         .addComponent(lblNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelIdentificaçãoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,7 +189,7 @@ import java.text.DateFormat;
                 .addGroup(jPanelIdentificaçãoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtCelular, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                     .addComponent(txtRg, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtcpf, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(txtCpf, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelIdentificaçãoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSexo)
@@ -233,10 +218,12 @@ import java.text.DateFormat;
         lblCep.setText("CEP:");
 
         try {
-            txtcep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+            txtCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+
+        lblNumero.setText("Número:");
 
         javax.swing.GroupLayout jPanelLogradouroLayout = new javax.swing.GroupLayout(jPanelLogradouro);
         jPanelLogradouro.setLayout(jPanelLogradouroLayout);
@@ -247,26 +234,29 @@ import java.text.DateFormat;
                 .addGroup(jPanelLogradouroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelLogradouroLayout.createSequentialGroup()
                         .addGroup(jPanelLogradouroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEndereço, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEndereço)
-                            .addComponent(lblUf))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanelLogradouroLayout.createSequentialGroup()
+                                .addComponent(txtEndereço, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(48, 48, 48)
+                                .addComponent(txtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblEndereço))
+                        .addContainerGap(78, Short.MAX_VALUE))
                     .addGroup(jPanelLogradouroLayout.createSequentialGroup()
-                        .addComponent(jComboBoxUf, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanelLogradouroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxUf, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblUf))
                         .addGroup(jPanelLogradouroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelLogradouroLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanelLogradouroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtComplemento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLogradouroLayout.createSequentialGroup()
-                                        .addGroup(jPanelLogradouroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblComplemento))
-                                        .addGap(30, 30, 30)
-                                        .addGroup(jPanelLogradouroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblBairro))))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(lblNumero)
+                                .addGap(73, 73, 73)
+                                .addComponent(lblComplemento)
+                                .addGap(135, 135, 135)
+                                .addComponent(lblBairro)
+                                .addGap(191, 191, 191))
                             .addGroup(jPanelLogradouroLayout.createSequentialGroup()
                                 .addGap(48, 48, 48)
                                 .addGroup(jPanelLogradouroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,7 +264,7 @@ import java.text.DateFormat;
                                     .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(47, 47, 47)
                                 .addGroup(jPanelLogradouroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtcep, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblCep))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
@@ -282,32 +272,32 @@ import java.text.DateFormat;
             jPanelLogradouroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLogradouroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelLogradouroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEndereço)
-                    .addComponent(lblComplemento)
-                    .addComponent(lblBairro))
+                .addGroup(jPanelLogradouroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelLogradouroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblEndereço)
+                        .addComponent(lblNumero)
+                        .addComponent(lblComplemento))
+                    .addComponent(lblBairro, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGroup(jPanelLogradouroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelLogradouroLayout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addGroup(jPanelLogradouroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtEndereço, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblUf)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(txtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 31, Short.MAX_VALUE))
                     .addGroup(jPanelLogradouroLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanelLogradouroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCidade)
-                            .addComponent(lblCep))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblCep)
+                            .addComponent(lblUf))))
                 .addGroup(jPanelLogradouroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtCidade, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(jComboBoxUf)
-                    .addComponent(txtcep))
-                .addContainerGap(15, Short.MAX_VALUE))
+                    .addComponent(txtCep))
+                .addGap(15, 15, 15))
         );
 
         ButtonSalvar.setText("Salvar");
@@ -324,24 +314,48 @@ import java.text.DateFormat;
             }
         });
 
+        ButtonNovo.setText("Novo");
+        ButtonNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonNovoActionPerformed(evt);
+            }
+        });
+
+        ButtonFechar.setText("Fechar");
+        ButtonFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonFecharActionPerformed(evt);
+            }
+        });
+
+        ButtonPesquisar.setText("Pesquisar");
+        ButtonPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonPesquisarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelLogradouro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jPanelIdentificação, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ButtonAlterar)
-                .addGap(18, 18, 18)
-                .addComponent(ButtonSalvar)
-                .addGap(54, 54, 54))
+                .addComponent(ButtonPesquisar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ButtonNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ButtonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ButtonFechar)
+                .addGap(172, 172, 172))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanelIdentificação, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,11 +363,14 @@ import java.text.DateFormat;
                 .addComponent(jPanelIdentificação, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ButtonNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButtonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ButtonPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButtonFechar, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -363,10 +380,12 @@ import java.text.DateFormat;
     
     private void ButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSalvarActionPerformed
         ClienteCadastro clientes = new ClienteCadastro();
+        ClienteEndereco clienteEndereco = new ClienteEndereco();
+        
         clientes.setNomeCliente(txtNome.getText());
         clientes.setSexoCliente(String.valueOf(jComboBoxSexo.getSelectedItem()));
         clientes.setRgCliente(txtRg.getText());
-        clientes.setCpfCliente(txtcpf.getText());
+        clientes.setCpfCliente(txtCpf.getText());
         DateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
         Date date = null;
         try {
@@ -385,12 +404,59 @@ import java.text.DateFormat;
         clientes.setDataCadastroCliente(data);
         ClienteControl clienteControl = new ClienteControl();
         clienteControl.CadastrarCliente(clientes);
+        
+        ClienteEnderecoControl cadastrarEnderecoControl = new ClienteEnderecoControl();
+        cadastrarEnderecoControl.CadastrarEndereco(clienteEndereco);
+        clienteEndereco.setRuaCliente(txtEndereço.getText());
+        clienteEndereco.setNumeroCliente(txtNumero.getText());
+        clienteEndereco.setBairroCliente(txtBairro.getText());
+        clienteEndereco.setCidadeCliente(txtCidade.getText());
+        clienteEndereco.setUfCliente(String.valueOf(jComboBoxUf.getSelectedItem()));
+        clienteEndereco.setCepCliente(txtCep.getText());
+        clienteEndereco.setComplementoCliente(txtComplemento.getText());
+        
+        
         JOptionPane.showMessageDialog(null, "Gravado com sucesso!!!");
+    
     }//GEN-LAST:event_ButtonSalvarActionPerformed
 
     private void ButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAlterarActionPerformed
-
+        ClienteCadastro clienteCard = new ClienteCadastro();      
+      
+        clienteCard.setNomeCliente(txtNome.getText());
+        clienteCard.setSexoCliente(jComboBoxSexo.getSelectedItem().toString());
+        clienteCard.setRgCliente(txtRg.getText());
+        clienteCard.setCpfCliente(txtCpf.getText());
+       //clienteCard.setDataNascimentoCliente(txtDataNasc.getText());
+        clienteCard.setEmailCliente(txtEmail.getText());
+        clienteCard.setCelularCliente(txtCelular.getText());
+        clienteCard.setTelefoneCliente(txtTelefone.getText());
+        
+        ClienteControl clienteControl = new ClienteControl();
+        
+        clienteControl.alterarCliente(clienteCard);
+        JOptionPane.showMessageDialog(null, "Gravado com sucesso!!!");
+    
+    
     }//GEN-LAST:event_ButtonAlterarActionPerformed
+
+    private void ButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonPesquisarActionPerformed
+        if (consultaCli == null || !consultaCli.isDisplayable()) {
+            consultaCli = new Consulta();
+            consultaCli.setVisible(true);
+        }
+        consultaCli.toFront();
+        
+                                 
+    }//GEN-LAST:event_ButtonPesquisarActionPerformed
+
+    private void ButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonFecharActionPerformed
+       System.exit(0);
+    }//GEN-LAST:event_ButtonFecharActionPerformed
+
+    private void ButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonNovoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonNovoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -429,40 +495,41 @@ import java.text.DateFormat;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonAlterar;
+    private javax.swing.JButton ButtonFechar;
+    private javax.swing.JButton ButtonNovo;
+    private javax.swing.JButton ButtonPesquisar;
     private javax.swing.JButton ButtonSalvar;
     private javax.swing.JComboBox<String> jComboBoxSexo;
     private javax.swing.JComboBox<String> jComboBoxUf;
     private javax.swing.JPanel jPanelIdentificação;
     private javax.swing.JPanel jPanelLogradouro;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblBairro;
     private javax.swing.JLabel lblCelular;
     private javax.swing.JLabel lblCep;
     private javax.swing.JLabel lblCidade;
     private javax.swing.JLabel lblComplemento;
     private javax.swing.JLabel lblCpf;
-    private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblDataNasc;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblEndereço;
-    private javax.swing.JLabel lblHora;
     private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblNumero;
     private javax.swing.JLabel lblRg;
     private javax.swing.JLabel lblSexo;
     private javax.swing.JLabel lblTelefoneFixo;
     private javax.swing.JLabel lblUf;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JFormattedTextField txtCelular;
+    private javax.swing.JFormattedTextField txtCep;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtComplemento;
-    private javax.swing.JFormattedTextField txtData;
+    private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JFormattedTextField txtDataNasc;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEndereço;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtNumero;
     private javax.swing.JFormattedTextField txtRg;
     private javax.swing.JFormattedTextField txtTelefone;
-    private javax.swing.JFormattedTextField txtcep;
-    private javax.swing.JFormattedTextField txtcpf;
     // End of variables declaration//GEN-END:variables
 }

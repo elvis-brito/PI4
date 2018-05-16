@@ -19,7 +19,8 @@ public class AcessoMySql {
     public Connection conectar(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/mydb?user=root&password=usbw");
+            //con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=true");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?user=root&password=root");
         } catch(ClassNotFoundException ex){
             ex.printStackTrace();
         } catch(SQLException ex){

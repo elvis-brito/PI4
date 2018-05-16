@@ -7,6 +7,7 @@ package br.com.senac.cliente;
 
 import java.util.Date;
 
+
 /**
  *
  * @author Jussara Andrade
@@ -110,13 +111,6 @@ public class ClienteCadastro {
 
     public void setDataCadastroCliente(Date dataCadastroCliente) {
         this.dataCadastroCliente = dataCadastroCliente;
-    }
-
-    public Object getData() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
-    
+    }    
     
 }
