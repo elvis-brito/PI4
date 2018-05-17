@@ -17,8 +17,8 @@ public class ClienteControl {
     ResultSet rs;
     
     String ClienteInsert = "INSERT INTO cliente (nome_cliente, sexo_cliente, rg_cliente, cpf_cliente, data_nasc_cliente, email_cliente, celular_cliente, telefone_cliente, data_cadastro_cliente, enable) VALUES (?,?,?,?,?,?,?,?,?,?)";
-    String ClienteSelect = "SELECT * FROM cliente WHERE nome_cliente LIKE ? AND enable = 1";
-    String ClienteUpdate = "UPDATE cliente SET nome_cliente = ?, sexo_cliente = ?, rg_cliente = ?, cpf_cliente = ?, data_nasc_cliente = ?, email_cliente = ?, celular_cliente = ?, telefone_cliente = ? WHERE id_cliente = ?";
+    String ClienteSelect = "select * from cliente where nome_cliente like ?";
+    String ClienteUpdate = "UPDATE cliente SET nome_cliente = ?, sexo_cliente= ?, rg_cliente = ?, cpf_cliente= ?, data_nasc_cliente = ?, email_cliente = ?, celular_cliente = ?, telefone_cliente = ? WHERE id_cliente = ?";
     
     public void CadastrarCliente(ClienteCadastro cliente){
         try{
@@ -50,6 +50,7 @@ public class ClienteControl {
             ClienteCadastro cli;
             while(rs.next()){
                 cli = new ClienteCadastro();
+                cli.setIdCliente(rs.getInt("id_cliente"));
                 cli.setNomeCliente(rs.getString("nome_cliente"));
                 cli.setSexoCliente(rs.getString("sexo_cliente"));
                 cli.setRgCliente(rs.getString("rg_cliente"));
@@ -58,8 +59,7 @@ public class ClienteControl {
                 cli.setEmailCliente(rs.getString("email_cliente"));
                 cli.setCelularCliente(rs.getString("celular_cliente"));
                 cli.setTelefoneCliente(rs.getString("telefone_cliente"));
-                cli.setDataCadastroCliente(rs.getDate("data_cadastro_cliente"));
-                     
+                cli.setDataCadastroCliente(rs.getDate("data_cadastro_cliente"));    
                 consulta.add(cli);
                 
                
@@ -83,8 +83,7 @@ public class ClienteControl {
             pstm.setString(6, cliente.getEmailCliente());
             pstm.setString(7, cliente.getCelularCliente());
             pstm.setString(8, cliente.getTelefoneCliente());
-            pstm.setDate(9, new Date(cliente.getDataCadastroCliente().getTime()));
-            pstm.setBoolean(10, true);
+            pstm.setInt(9, cliente.getIdCliente());
             pstm.executeUpdate();
         }catch(SQLException ex){
             ex.printStackTrace();

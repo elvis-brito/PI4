@@ -9,7 +9,6 @@ package br.com.senac.vendedor;
 import br.com.senac.cliente.ClienteCadastro;
 import br.com.senac.cliente.ClienteControl;
 import br.com.senac.cliente.ClienteEndereco;
-import br.com.senac.cliente.ClienteEnderecoControl;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 public class Consulta extends javax.swing.JFrame {
     List<ClienteCadastro> clienteCadastro;
     List<ClienteEndereco> clienteEndereco;
-    DefaultTableModel tabelaCliente = new DefaultTableModel (null, new String []{"Nome", "Sexo", "RG", "CPF", "Data Nascimento", "E-mail", "Celular", "Telefone", "Data Cadastro"});
+    DefaultTableModel tmCliente = new DefaultTableModel (null, new String []{"ID", "Nome", "Sexo", "RG", "CPF", "Data Nascimento", "E-mail", "Celular", "Telefone", "Data Cadastro"});
     DefaultTableModel tabelaEndereco = new DefaultTableModel (null, new String []{"Rua", "Número", "Bairro", "Cidade", "UF", "CEP", "Complemento"});
     /** Creates new form Pesquisa */
     public Consulta() {
@@ -45,12 +44,6 @@ public class Consulta extends javax.swing.JFrame {
         ButtonPesquisarDados = new javax.swing.JButton();
         TabelaDadosClientes = new javax.swing.JScrollPane();
         tbCliente = new javax.swing.JTable();
-        TabelaEnderecoCliente = new javax.swing.JPanel();
-        lblPesquisar1 = new javax.swing.JLabel();
-        txtPequisaEnderecoCliente = new javax.swing.JTextField();
-        TabelaEndereco = new javax.swing.JScrollPane();
-        tbEndereco = new javax.swing.JTable();
-        ButtonPesquisarEnderecoCliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -65,14 +58,7 @@ public class Consulta extends javax.swing.JFrame {
             }
         });
 
-        tbCliente.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Nome", "Sexo", "RG", "CPF", "Data Nascimento", "E-mail", "Celular", "Telefone", "Data Cadastro"
-            }
-        ));
+        tbCliente.setModel(tmCliente);
         tbCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbClienteMouseClicked(evt);
@@ -105,63 +91,8 @@ public class Consulta extends javax.swing.JFrame {
                     .addComponent(txtPesquisaDadosCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButtonPesquisarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TabelaDadosClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        TabelaEnderecoCliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço Cliente"));
-
-        lblPesquisar1.setText("Pesquisar:");
-
-        tbEndereco.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Rua ", "Número", "Bairro", "Cidade", "UF", "CEP", "Complemento"
-            }
-        ));
-        tbEndereco.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbEnderecoMouseClicked(evt);
-            }
-        });
-        TabelaEndereco.setViewportView(tbEndereco);
-
-        ButtonPesquisarEnderecoCliente.setText("Pesquisar");
-        ButtonPesquisarEnderecoCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonPesquisarEnderecoClienteActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout TabelaEnderecoClienteLayout = new javax.swing.GroupLayout(TabelaEnderecoCliente);
-        TabelaEnderecoCliente.setLayout(TabelaEnderecoClienteLayout);
-        TabelaEnderecoClienteLayout.setHorizontalGroup(
-            TabelaEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TabelaEnderecoClienteLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(TabelaEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TabelaEndereco)
-                    .addGroup(TabelaEnderecoClienteLayout.createSequentialGroup()
-                        .addComponent(lblPesquisar1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPequisaEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ButtonPesquisarEnderecoCliente)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        TabelaEnderecoClienteLayout.setVerticalGroup(
-            TabelaEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TabelaEnderecoClienteLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(TabelaEnderecoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPesquisar1)
-                    .addComponent(txtPequisaEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButtonPesquisarEnderecoCliente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TabelaEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(TabelaDadosClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -170,18 +101,14 @@ public class Consulta extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TabelaEnderecoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jPanelPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(TabelaEnderecoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -195,26 +122,26 @@ public class Consulta extends javax.swing.JFrame {
           
        
         if (clienteCadastro == null){
-            JOptionPane.showMessageDialog(null, "Nenhum produto encontrado");
+            JOptionPane.showMessageDialog(null, "Nenhum cliente encontrado");
         }else{
-            while(tabelaCliente.getRowCount() > 0){
-                 tabelaCliente.removeRow(0);
+            while(tmCliente.getRowCount() > 0){
+                 tmCliente.removeRow(0);
             }
             
-            String [] campos = new String[]{null, null, null, null, null, null, null, null, null};
+            String [] campos = new String[]{null, null, null, null, null, null, null, null, null, null};
                 for(int i = 0; i < clienteCadastro.size(); i++){
                     
-                tabelaCliente.addRow(campos);
-                
-                tabelaCliente.setValueAt(clienteCadastro.get(i).getNomeCliente(), i, 1);
-                tabelaCliente.setValueAt(clienteCadastro.get(i).getSexoCliente(), i, 2);
-                tabelaCliente.setValueAt(clienteCadastro.get(i).getRgCliente(), i, 3);
-                tabelaCliente.setValueAt(clienteCadastro.get(i).getCpfCliente(), i, 4);
-                tabelaCliente.setValueAt(clienteCadastro.get(i).getDataNascimentoCliente(), i, 5);
-                tabelaCliente.setValueAt(clienteCadastro.get(i).getEmailCliente(), i, 6);
-                tabelaCliente.setValueAt(clienteCadastro.get(i).getCelularCliente(), i, 7);
-                tabelaCliente.setValueAt(clienteCadastro.get(i).getTelefoneCliente(), i, 8);
-                tabelaCliente.setValueAt(clienteCadastro.get(i).getDataCadastroCliente(), i, 9);
+                tmCliente.addRow(campos);
+                tmCliente.setValueAt(clienteCadastro.get(i).getIdCliente(), i, 0);
+                tmCliente.setValueAt(clienteCadastro.get(i).getNomeCliente(), i, 1);
+                tmCliente.setValueAt(clienteCadastro.get(i).getSexoCliente(), i, 2);
+                tmCliente.setValueAt(clienteCadastro.get(i).getRgCliente(), i, 3);
+                tmCliente.setValueAt(clienteCadastro.get(i).getCpfCliente(), i, 4);
+                tmCliente.setValueAt(clienteCadastro.get(i).getDataNascimentoCliente(), i, 5);
+                tmCliente.setValueAt(clienteCadastro.get(i).getEmailCliente(), i, 6);
+                tmCliente.setValueAt(clienteCadastro.get(i).getCelularCliente(), i, 7);
+                tmCliente.setValueAt(clienteCadastro.get(i).getTelefoneCliente(), i, 8);
+                tmCliente.setValueAt(clienteCadastro.get(i).getDataCadastroCliente(), i, 9);
                 
                 
                 }
@@ -226,66 +153,8 @@ public class Consulta extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonPesquisarDadosActionPerformed
 
     private void tbClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbClienteMouseClicked
-        
-//        Cliente cli = new Cliente();
-//        int linha = tbCliente.getSelectedRow();
-//        if(linha != -1){
-//        txtNome.setText(tbCliente.getValueAt(linha, 1).toString());
-//        jComboxSexo.setSelectedItem(tbCliente.getValueAt(linha, 2).toString());
-//        jComboxCor.setSelectedItem(tmProduto.getValueAt(linha, 3).toString());
-//        jComboxTamanho.setSelectedItem(tmProduto.getValueAt(linha, 4).toString());
-//        tfDescricao.setText(tmProduto.getValueAt(linha, 5).toString());
-//        tfValor.setText(tmProduto.getValueAt(linha, 6).toString());
-//        tfEstoque.setText(tmProduto.getValueAt(linha, 7).toString());
-        
-        
+   
     }//GEN-LAST:event_tbClienteMouseClicked
-
-    private void ButtonPesquisarEnderecoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonPesquisarEnderecoClienteActionPerformed
-       ClienteEnderecoControl cli = new ClienteEnderecoControl();
-          clienteEndereco = cli.listaEndereco(txtPequisaEnderecoCliente.getText());
-          
-       
-        if (clienteEndereco == null){
-            JOptionPane.showMessageDialog(null, "Nenhum produto encontrado");
-        }else{
-            while(tabelaEndereco.getRowCount() > 0){
-                 tabelaEndereco.removeRow(0);
-            }
-            
-            String [] campos = new String[]{null, null, null, null, null, null, null, null, null};
-                for(int i = 0; i < clienteEndereco.size(); i++){
-                    
-                tabelaCliente.addRow(campos);
-                
-                tabelaCliente.setValueAt(clienteEndereco.get(i).getRuaCliente(), i, 1);
-                tabelaCliente.setValueAt(clienteEndereco.get(i).getNumeroCliente(), i, 2);
-                tabelaCliente.setValueAt(clienteEndereco.get(i).getBairroCliente(), i, 3);
-                tabelaCliente.setValueAt(clienteEndereco.get(i).getCidadeCliente(), i, 4);
-                tabelaCliente.setValueAt(clienteEndereco.get(i).getUfCliente(), i, 5);
-                tabelaCliente.setValueAt(clienteEndereco.get(i).getCepCliente(), i, 6);
-                tabelaCliente.setValueAt(clienteEndereco.get(i).getComplementoCliente(), i, 7);
-               
-                
-                }
-         
-        }
-        
-    }//GEN-LAST:event_ButtonPesquisarEnderecoClienteActionPerformed
-
-    private void tbEnderecoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEnderecoMouseClicked
-        //        Cliente cli = new Cliente();
-//        int linha = tbCliente.getSelectedRow();
-//        if(linha != -1){
-//        txtNome.setText(tbCliente.getValueAt(linha, 1).toString());
-//        jComboxSexo.setSelectedItem(tbCliente.getValueAt(linha, 2).toString());
-//        jComboxCor.setSelectedItem(tmProduto.getValueAt(linha, 3).toString());
-//        jComboxTamanho.setSelectedItem(tmProduto.getValueAt(linha, 4).toString());
-//        tfDescricao.setText(tmProduto.getValueAt(linha, 5).toString());
-//        tfValor.setText(tmProduto.getValueAt(linha, 6).toString());
-//        tfEstoque.setText(tmProduto.getValueAt(linha, 7).toString());
-        
-    }//GEN-LAST:event_tbEnderecoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -295,16 +164,10 @@ public class Consulta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonPesquisarDados;
-    private javax.swing.JButton ButtonPesquisarEnderecoCliente;
     private javax.swing.JScrollPane TabelaDadosClientes;
-    private javax.swing.JScrollPane TabelaEndereco;
-    private javax.swing.JPanel TabelaEnderecoCliente;
     private javax.swing.JPanel jPanelPesquisar;
     private javax.swing.JLabel lblPesquisar;
-    private javax.swing.JLabel lblPesquisar1;
     private javax.swing.JTable tbCliente;
-    private javax.swing.JTable tbEndereco;
-    private javax.swing.JTextField txtPequisaEnderecoCliente;
     private javax.swing.JTextField txtPesquisaDadosCliente;
     // End of variables declaration//GEN-END:variables
 

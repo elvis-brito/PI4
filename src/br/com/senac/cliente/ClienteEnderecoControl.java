@@ -89,7 +89,7 @@ public void alterarEnderco(ClienteEndereco endereco){
             pstm.executeUpdate();
         }catch(SQLException ex){
             ex.printStackTrace();
+             }
         }
-    }
    }
 
